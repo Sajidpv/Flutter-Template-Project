@@ -1,0 +1,67 @@
+name: stock_shift_pro
+description: "Godown transfer and order processing application for HAASH India Exports Pvt Ltd."
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.8
+  flutter_bloc: ^9.1.0
+  intl: ^0.20.2
+  awesome_extensions: ^2.0.21
+  flutter_svg: ^2.1.0
+  get_it: ^8.0.3
+  equatable: ^2.0.7
+  uuid: ^4.5.1
+  printing: ^5.14.2
+  pdf: ^3.11.3
+  hydrated_bloc: ^10.0.0
+  path_provider: ^2.1.5
+  image_picker: ^1.1.2
+  shimmer: ^3.0.0
+  flutter_secure_storage: ^9.2.4
+  cached_network_image: ^3.4.1
+  permission_handler: ^12.0.0+1
+  connectivity_plus: ^6.1.4
+  dio: ^5.8.0+1
+  pretty_dio_logger: ^1.4.0
+  fluttertoast: ^8.2.12
+  another_flushbar: ^1.12.30
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.3
+  rename: ^3.0.2
+
+
+flutter_launcher_icons:
+  image_path: "assets/logo/StockShift-PRO-logo.jpg"
+  android: "launcher_icon"
+  ios: false
+  remove_alpha_ios: true
+  min_sdk_android: 24
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/logo/StockShift-PRO-logo.jpg"
+
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/logo/
+
+
