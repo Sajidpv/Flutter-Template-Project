@@ -1,7 +1,7 @@
-import 'package:stock_shift_pro/cors/configs/urls.dart';
-import 'package:stock_shift_pro/data/network/api_services/base_api_services.dart';
-import 'package:stock_shift_pro/features/auth/model/user.model.dart';
-import 'package:stock_shift_pro/features/auth/repository/auth_repository.dart';
+import 'package:erp/cors/configs/urls.dart';
+import 'package:erp/data/network/api_services/base_api_services.dart';
+import 'package:erp/features/auth/model/user.model.dart';
+import 'package:erp/features/auth/repository/auth_repository.dart';
 
 class AuthHttpApiRepository implements AuthRepository {
   final BaseApiServices _apiServices;

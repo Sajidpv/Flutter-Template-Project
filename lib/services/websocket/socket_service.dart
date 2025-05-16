@@ -1,6 +1,6 @@
 // import 'package:flutter/foundation.dart';
 // import 'package:socket_io_client/socket_io_client.dart' as io;
-// import 'package:stock_shift_pro/cors/configs/app_configs.dart';
+// import 'package:erp/cors/configs/app_configs.dart';
 
 // class SocketService {
 //   static final SocketService _instance = SocketService._internal();

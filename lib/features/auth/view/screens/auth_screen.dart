@@ -1,13 +1,13 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_shift_pro/cors/configs/app_strings.dart';
-import 'package:stock_shift_pro/cors/configs/enums.dart';
-import 'package:stock_shift_pro/cors/widgets/buttons/material_button.dart';
-import 'package:stock_shift_pro/features/auth/view/widgets/logo_with_title.dart';
-import 'package:stock_shift_pro/routes/route_names.dart';
-import 'package:stock_shift_pro/utils/constants/colors.dart';
-import 'package:stock_shift_pro/utils/constants/sizes.dart';
-import 'package:stock_shift_pro/utils/extensions/spacer_extension.dart';
+import 'package:erp/cors/configs/app_strings.dart';
+import 'package:erp/cors/configs/enums.dart';
+import 'package:erp/cors/widgets/buttons/material_button.dart';
+import 'package:erp/features/auth/view/widgets/logo_with_title.dart';
+import 'package:erp/routes/route_names.dart';
+import 'package:erp/utils/constants/colors.dart';
+import 'package:erp/utils/constants/sizes.dart';
+import 'package:erp/utils/extensions/spacer_extension.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});

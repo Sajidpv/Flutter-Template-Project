@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stock_shift_pro/cors/configs/enums.dart';
-import 'package:stock_shift_pro/routes/route_names.dart';
+import 'package:erp/cors/configs/enums.dart';
+import 'package:erp/routes/route_names.dart';
 
 void navigateUserByRole(BuildContext context, UserRole? role) {
   if (role == UserRole.admin || role == UserRole.subAdmin) {

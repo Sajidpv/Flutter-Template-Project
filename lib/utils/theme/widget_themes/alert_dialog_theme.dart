@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stock_shift_pro/utils/constants/colors.dart';
-import 'package:stock_shift_pro/utils/constants/sizes.dart';
+import 'package:erp/utils/constants/colors.dart';
+import 'package:erp/utils/constants/sizes.dart';
 
 class CustomDialogTheme {
   CustomDialogTheme._();

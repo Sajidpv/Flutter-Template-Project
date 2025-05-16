@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_shift_pro/cors/widgets/buttons/material_button.dart';
+import 'package:erp/cors/widgets/buttons/material_button.dart';
 
 Future<void> showCustomAlertDialog({
   required BuildContext context,

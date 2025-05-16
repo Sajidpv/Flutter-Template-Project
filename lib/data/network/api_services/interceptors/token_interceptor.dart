@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:stock_shift_pro/features/auth/view.model/services/session_services.dart';
+import 'package:erp/features/auth/view.model/services/session_services.dart';
 
 class TokenInterceptor extends Interceptor {
   final SessionController _sessionController = SessionController();

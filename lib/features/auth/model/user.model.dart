@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_collection_literals
 
-import 'package:stock_shift_pro/cors/configs/enums.dart';
+import 'package:erp/cors/configs/enums.dart';
 
 class UserResponse {
   bool? success;

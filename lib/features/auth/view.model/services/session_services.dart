@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:stock_shift_pro/cors/configs/app_strings.dart';
-import 'package:stock_shift_pro/cors/configs/enums.dart';
-import 'package:stock_shift_pro/features/auth/model/user.model.dart';
+import 'package:erp/cors/configs/app_strings.dart';
+import 'package:erp/cors/configs/enums.dart';
+import 'package:erp/features/auth/model/user.model.dart';
 import '../../../../utils/local_storage/local_storage.dart';
 
 //singleton class

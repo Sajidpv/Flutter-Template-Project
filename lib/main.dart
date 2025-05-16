@@ -1,21 +1,18 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:stock_shift_pro/cors/configs/app_strings.dart';
-import 'package:stock_shift_pro/cors/widgets/state_management/cubit/theme_cubit.dart';
-import 'package:stock_shift_pro/features/auth/view.model/bloc/auth_bloc.dart';
-import 'package:stock_shift_pro/routes/route_names.dart';
-import 'package:stock_shift_pro/routes/routes.dart';
-import 'package:stock_shift_pro/services/bloc/bloc_observers.dart';
-import 'package:stock_shift_pro/services/bloc/bloc_providers.dart';
-import 'package:stock_shift_pro/services/firebase/firebase_options.dart';
-import 'package:stock_shift_pro/services/firebase/firebase_push_notification_service.dart';
-import 'package:stock_shift_pro/services/DI/service_locator.dart';
-import 'package:stock_shift_pro/utils/exceptions/custom_error_handling_widget.dart';
-import 'package:stock_shift_pro/utils/theme/theme.dart';
+import 'package:erp/cors/configs/app_strings.dart';
+import 'package:erp/cors/widgets/state_management/cubit/theme_cubit.dart';
+import 'package:erp/features/auth/view.model/bloc/auth_bloc.dart';
+import 'package:erp/routes/route_names.dart';
+import 'package:erp/routes/routes.dart';
+import 'package:erp/services/bloc/bloc_observers.dart';
+import 'package:erp/services/bloc/bloc_providers.dart';
+import 'package:erp/services/DI/service_locator.dart';
+import 'package:erp/utils/exceptions/custom_error_handling_widget.dart';
+import 'package:erp/utils/theme/theme.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -38,8 +35,8 @@ void main() async {
   // };
   WidgetsFlutterBinding.ensureInitialized();
   //Init firebase with options
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await PushNotificationService().init();
+  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //await PushNotificationService().init();
 
   /// initialize hydrated bloc
   HydratedBloc.storage = await HydratedStorage.build(

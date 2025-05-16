@@ -1,21 +1,21 @@
 import 'package:awesome_extensions/awesome_extensions_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stock_shift_pro/cors/configs/app_strings.dart';
-import 'package:stock_shift_pro/cors/configs/enums.dart';
-import 'package:stock_shift_pro/cors/widgets/buttons/material_button.dart';
-import 'package:stock_shift_pro/cors/widgets/inputs/texts/text_fields.dart';
-import 'package:stock_shift_pro/features/auth/model/user.model.dart';
-import 'package:stock_shift_pro/features/auth/view.model/bloc/auth_bloc.dart';
-import 'package:stock_shift_pro/features/auth/view.model/services/session_services.dart';
-import 'package:stock_shift_pro/features/auth/view/widgets/logo_with_title.dart';
-import 'package:stock_shift_pro/routes/route_names.dart';
-import 'package:stock_shift_pro/utils/constants/colors.dart';
-import 'package:stock_shift_pro/utils/constants/sizes.dart';
-import 'package:stock_shift_pro/utils/extensions/context_extensions.dart';
-import 'package:stock_shift_pro/utils/helpers/navigation_helper.dart';
-import 'package:stock_shift_pro/utils/popups/utils.dart';
-import 'package:stock_shift_pro/utils/validators/validation.dart';
+import 'package:erp/cors/configs/app_strings.dart';
+import 'package:erp/cors/configs/enums.dart';
+import 'package:erp/cors/widgets/buttons/material_button.dart';
+import 'package:erp/cors/widgets/inputs/texts/text_fields.dart';
+import 'package:erp/features/auth/model/user.model.dart';
+import 'package:erp/features/auth/view.model/bloc/auth_bloc.dart';
+import 'package:erp/features/auth/view.model/services/session_services.dart';
+import 'package:erp/features/auth/view/widgets/logo_with_title.dart';
+import 'package:erp/routes/route_names.dart';
+import 'package:erp/utils/constants/colors.dart';
+import 'package:erp/utils/constants/sizes.dart';
+import 'package:erp/utils/extensions/context_extensions.dart';
+import 'package:erp/utils/helpers/navigation_helper.dart';
+import 'package:erp/utils/popups/utils.dart';
+import 'package:erp/utils/validators/validation.dart';
 
 class SignUpScreen extends StatelessWidget {
   final UserRole role;

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stock_shift_pro/features/auth/model/user.model.dart';
-import 'package:stock_shift_pro/features/auth/repository/auth_repository.dart';
-import 'package:stock_shift_pro/features/auth/view.model/services/session_services.dart';
+import 'package:erp/features/auth/model/user.model.dart';
+import 'package:erp/features/auth/repository/auth_repository.dart';
+import 'package:erp/features/auth/view.model/services/session_services.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

@@ -1,4 +1,4 @@
-package com.haash.stock_shift_pro
+package com.haash.erp
 
 import io.flutter.embedding.android.FlutterActivity
 

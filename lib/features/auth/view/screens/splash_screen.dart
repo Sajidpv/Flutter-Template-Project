@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stock_shift_pro/features/auth/view.model/bloc/auth_bloc.dart';
-import 'package:stock_shift_pro/routes/route_names.dart';
-import 'package:stock_shift_pro/utils/constants/app_images.dart';
-import 'package:stock_shift_pro/utils/helpers/navigation_helper.dart';
+import 'package:erp/features/auth/view.model/bloc/auth_bloc.dart';
+import 'package:erp/routes/route_names.dart';
+import 'package:erp/utils/constants/app_images.dart';
+import 'package:erp/utils/helpers/navigation_helper.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -12,12 +14,14 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthenticatedState) {
-          navigateUserByRole(context, state.user.role);
-        }
-        if (state is UnauthenticatedState) {
-          Navigator.pushReplacementNamed(context, RoutesName.auth);
-        }
+        Timer(const Duration(seconds: 2), () {
+          if (state is AuthenticatedState) {
+            navigateUserByRole(context, state.user.role);
+          }
+          if (state is UnauthenticatedState) {
+            Navigator.pushReplacementNamed(context, RoutesName.auth);
+          }
+        });
       },
       child: Scaffold(
         body: Center(

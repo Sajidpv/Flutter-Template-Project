@@ -1,8 +1,8 @@
 import 'package:awesome_extensions/awesome_extensions_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_shift_pro/utils/constants/app_images.dart';
-import 'package:stock_shift_pro/utils/constants/sizes.dart';
-import 'package:stock_shift_pro/utils/extensions/spacer_extension.dart';
+import 'package:erp/utils/constants/app_images.dart';
+import 'package:erp/utils/constants/sizes.dart';
+import 'package:erp/utils/extensions/spacer_extension.dart';
 
 class LogoWithTitle extends StatelessWidget {
   final String title, subText;

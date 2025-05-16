@@ -1,7 +1,7 @@
 import 'package:awesome_extensions/awesome_extensions_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_shift_pro/utils/constants/colors.dart';
-import 'package:stock_shift_pro/utils/constants/sizes.dart';
+import 'package:erp/utils/constants/colors.dart';
+import 'package:erp/utils/constants/sizes.dart';
 
 class MaterialButtonWidget extends StatelessWidget {
   const MaterialButtonWidget({

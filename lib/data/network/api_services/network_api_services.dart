@@ -1,15 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:stock_shift_pro/cors/configs/app_strings.dart';
-import 'package:stock_shift_pro/data/app_exceptions.dart';
-import 'package:stock_shift_pro/data/network/api_services/base_api_services.dart';
-import 'package:stock_shift_pro/data/network/api_services/interceptors/token_interceptor.dart';
-import 'package:stock_shift_pro/features/auth/view.model/services/session_services.dart';
+import 'package:erp/cors/configs/app_strings.dart';
+import 'package:erp/data/app_exceptions.dart';
+import 'package:erp/data/network/api_services/base_api_services.dart';
+import 'package:erp/data/network/api_services/interceptors/token_interceptor.dart';
+import 'package:erp/features/auth/view.model/services/session_services.dart';
 
 class NetworkApiService implements BaseApiServices {
   final Dio _dio = Dio();
