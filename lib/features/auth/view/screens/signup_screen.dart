@@ -7,10 +7,13 @@ import 'package:stock_shift_pro/cors/widgets/buttons/material_button.dart';
 import 'package:stock_shift_pro/cors/widgets/inputs/texts/text_fields.dart';
 import 'package:stock_shift_pro/features/auth/model/user.model.dart';
 import 'package:stock_shift_pro/features/auth/view.model/bloc/auth_bloc.dart';
-import 'package:stock_shift_pro/features/auth/widgets/logo_with_title.dart';
+import 'package:stock_shift_pro/features/auth/view.model/services/session_services.dart';
+import 'package:stock_shift_pro/features/auth/view/widgets/logo_with_title.dart';
 import 'package:stock_shift_pro/routes/route_names.dart';
+import 'package:stock_shift_pro/utils/constants/colors.dart';
 import 'package:stock_shift_pro/utils/constants/sizes.dart';
 import 'package:stock_shift_pro/utils/extensions/context_extensions.dart';
+import 'package:stock_shift_pro/utils/helpers/navigation_helper.dart';
 import 'package:stock_shift_pro/utils/popups/utils.dart';
 import 'package:stock_shift_pro/utils/validators/validation.dart';
 
@@ -37,15 +40,12 @@ class SignUpScreen extends StatelessWidget {
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesName.login,
+            arguments: {'isLogin': true},
             (route) => false,
           );
         }
         if (state is AuthenticatedState) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            RoutesName.user_home,
-            (route) => false,
-          );
+          navigateUserByRole(context, state.user.role);
         }
       },
       child: Scaffold(
@@ -89,39 +89,69 @@ class SignUpScreen extends StatelessWidget {
                           hintText: 'Password',
                         ),
 
-                        MaterialButtonWidget(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-
-                              context.authBloc.add(
-                                isLogin
-                                    ? LoggedInEvent(
-                                      mobile: phoneController.text.trim(),
-                                      password: passwordController.text.trim(),
-                                    )
-                                    : SignUpEvent(
-                                      user: UserModel(
-                                        name: nameController.text,
-                                        mobile: int.parse(phoneController.text),
-                                        role: role,
-                                        accessCode:
-                                            accesscodeController.text.trim(),
-                                        password:
-                                            passwordController.text.trim(),
-                                      ),
-                                    ),
-                              );
+                        BlocBuilder<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            if (state is AuthLoadingState) {
+                              return CircularProgressIndicator().toCenter();
                             }
+                            return MaterialButtonWidget(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+
+                                  context.authBloc.add(
+                                    isLogin
+                                        ? LoggedInEvent(
+                                          mobile: phoneController.text.trim(),
+                                          deviceToken:
+                                              SessionController().fcmToken ??
+                                              '',
+                                          password:
+                                              passwordController.text.trim(),
+                                        )
+                                        : SignUpEvent(
+                                          user: UserModel(
+                                            name: nameController.text,
+                                            mobile: int.parse(
+                                              phoneController.text,
+                                            ),
+                                            role: role,
+                                            accessCode:
+                                                accesscodeController.text
+                                                    .trim(),
+                                            password:
+                                                passwordController.text.trim(),
+                                          ),
+                                        ),
+                                  );
+                                }
+                              },
+                              title: isLogin ? 'Login' : 'Register',
+                            );
                           },
-                          title: isLogin ? 'Login' : 'Register',
                         ),
                         MaterialButtonWidget(
                           color: Colors.transparent,
+                          textColor:
+                              context.isDark
+                                  ? AppPellet.white
+                                  : AppPellet.black,
                           onPressed:
                               () =>
-                                  Navigator.pushNamed(context, RoutesName.auth),
-                          title: 'Don\'t have an account? Register now.',
+                                  isLogin
+                                      ? Navigator.pushNamed(
+                                        context,
+                                        RoutesName.auth,
+                                      )
+                                      : Navigator.pushNamed(
+                                        context,
+                                        RoutesName.login,
+                                        arguments: {'isLogin': true},
+                                      ),
+                          title:
+                              isLogin
+                                  ? 'Don\'t have an account? Register now.'
+                                  : 'Already registered? Login to continue.',
                         ),
                       ],
                     ),

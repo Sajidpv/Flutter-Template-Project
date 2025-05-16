@@ -8,48 +8,46 @@ class AppException implements Exception {
 
   @override
   String toString() {
-    return '$prefix$message';
+    return message;
   }
 }
 
 class FetchDataException extends AppException {
-  FetchDataException(super.message)
-    : super(prefix: 'Error during data fetching: ');
+  FetchDataException(super.message) : super();
 }
 
 class BadRequestException extends AppException {
-  BadRequestException(super.message) : super(prefix: 'Bad request: ');
+  BadRequestException(super.message) : super();
 }
 
 class UnauthorisedException extends AppException {
-  UnauthorisedException(super.message) : super(prefix: 'Unauthorized: ');
+  UnauthorisedException(super.message) : super();
 }
 
 class NotFoundException extends AppException {
-  NotFoundException(super.message) : super(prefix: 'Not found: ');
+  NotFoundException(super.message) : super();
 }
 
 class ConflictException extends AppException {
-  ConflictException(super.message) : super(prefix: 'Conflict: ');
+  ConflictException(super.message) : super();
 }
 
 class ForbiddenException extends AppException {
-  ForbiddenException(super.message) : super(prefix: 'Forbidden: ');
+  ForbiddenException(super.message) : super();
 }
 
 class InternalServerException extends AppException {
-  InternalServerException(super.message)
-    : super(prefix: 'Internal server error: ');
+  InternalServerException(super.message) : super();
 }
 
 class NoInternetException extends AppException {
-  NoInternetException(super.message) : super(prefix: 'No internet: ');
+  NoInternetException(super.message) : super();
 }
 
 class TimeoutException extends AppException {
-  TimeoutException(super.message) : super(prefix: 'Timeout error: ');
+  TimeoutException(super.message) : super();
 }
 
 class TokenExpiredException extends AppException {
-  TokenExpiredException(super.message) : super(prefix: 'Token expired: ');
+  TokenExpiredException(super.message) : super();
 }

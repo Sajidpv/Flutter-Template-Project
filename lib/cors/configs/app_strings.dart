@@ -27,4 +27,5 @@ class SessionKey {
   static const String EMAIL = "email";
   static const String PASSWORD = "password";
   static const String TOKEN = "token";
+  static const String DEVICE_TOKEN = "device-fcm-token";
 }

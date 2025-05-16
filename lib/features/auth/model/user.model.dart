@@ -62,9 +62,13 @@ class UserModel {
     name = json['name'];
     mobile = json['mobile'];
     password = json['password'];
-    role = userRoleFromString(json['role']);
-    status = statusEnumFromString(json['status']);
-    accessCode = json['accessCode'];
+    if (json['role'] != null) {
+      role = userRoleFromString(json['role']);
+    }
+    if (json['status'] != null) {
+      status = statusEnumFromString(json['status']);
+    }
+    accessCode = json['accessCode'] ?? '';
     parentId = json['parentId'];
     plan =
         json['plan'] != null ? planEnumFromString(json['plan']) : json['plan'];

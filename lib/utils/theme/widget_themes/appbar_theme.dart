@@ -9,7 +9,7 @@ class CustomAppBarTheme {
     elevation: 0,
     centerTitle: false,
     scrolledUnderElevation: 0,
-    backgroundColor: Colors.transparent,
+    backgroundColor: AppPellet.white,
     surfaceTintColor: Colors.transparent,
     iconTheme: IconThemeData(color: AppPellet.black, size: AppSizes.iconMd),
     actionsIconTheme: IconThemeData(

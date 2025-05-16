@@ -19,7 +19,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onAppStarted(AppStartedEvent event, Emitter<AuthState> emit) async {
     await SessionController().getUserFromPreference();
-    print(SessionController().isLoggedIn);
     if (SessionController().isLoggedIn && SessionController().role != null) {
       emit(
         AuthenticatedState(
@@ -38,6 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final UserResponse response = await authRepository.loginApi({
         'mobile': event.mobile,
         'password': event.password,
+        'deviceToken': event.deviceToken,
       });
       await SessionController().saveUserInPreference(response);
       emit(AuthenticatedState(user: response.user!, token: response.token!));
@@ -49,6 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onLoggedOut(LoggedOutEvent event, Emitter<AuthState> emit) async {
     await SessionController().clearSession();
+    // locator<SocketService>().disconnect();
     emit(UnauthenticatedState());
   }
 

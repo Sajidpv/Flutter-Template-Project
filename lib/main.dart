@@ -1,15 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stock_shift_pro/cors/configs/app_strings.dart';
-import 'package:stock_shift_pro/cors/widgets/bloc/cubit/theme_cubit.dart';
+import 'package:stock_shift_pro/cors/widgets/state_management/cubit/theme_cubit.dart';
+import 'package:stock_shift_pro/features/auth/view.model/bloc/auth_bloc.dart';
 import 'package:stock_shift_pro/routes/route_names.dart';
 import 'package:stock_shift_pro/routes/routes.dart';
-import 'package:stock_shift_pro/services/bloc_observers.dart';
-import 'package:stock_shift_pro/services/bloc_providers.dart';
-import 'package:stock_shift_pro/services/service_locator.dart';
+import 'package:stock_shift_pro/services/bloc/bloc_observers.dart';
+import 'package:stock_shift_pro/services/bloc/bloc_providers.dart';
+import 'package:stock_shift_pro/services/firebase/firebase_options.dart';
+import 'package:stock_shift_pro/services/firebase/firebase_push_notification_service.dart';
+import 'package:stock_shift_pro/services/DI/service_locator.dart';
 import 'package:stock_shift_pro/utils/exceptions/custom_error_handling_widget.dart';
 import 'package:stock_shift_pro/utils/theme/theme.dart';
 
@@ -33,6 +37,9 @@ void main() async {
   //   FlutterError.presentError(details);
   // };
   WidgetsFlutterBinding.ensureInitialized();
+  //Init firebase with options
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await PushNotificationService().init();
 
   /// initialize hydrated bloc
   HydratedBloc.storage = await HydratedStorage.build(
@@ -66,21 +73,38 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         buildWhen: (previous, current) => current != previous,
         builder: (context, ThemeMode mode) {
-          return MaterialApp(
-            navigatorKey: navigatorKey,
-            builder: (context, child) {
-              ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-                return CustomErrorWidget(errorDetails: errorDetails);
-              };
-              return child ?? const SizedBox.shrink();
+          return BlocListener<AuthBloc, AuthState>(
+            listenWhen: (prev, curr) => curr is AuthenticatedState,
+            listener: (context, state) {
+              // if (state is AuthenticatedState) {
+              //   final socketService = locator<SocketService>();
+              //   socketService.connect(
+              //     SessionController().token ?? '',
+              //     SessionController().user?.sId.toString() ?? '',
+              //   );
+              //   final dispatcher = SocketEventDispatcher(
+              //     context: context,
+              //     socketService: socketService,
+              //   );
+              //   dispatcher.init();
+              // }
             },
-            title: AppStrings.appTitle,
-            themeMode: mode,
-            theme: AppThemes.lightTheme,
-            darkTheme: AppThemes.darkTheme,
-            debugShowCheckedModeBanner: false,
-            onGenerateRoute: Routes.generateRoute,
-            initialRoute: RoutesName.splash,
+            child: MaterialApp(
+              navigatorKey: navigatorKey,
+              builder: (context, child) {
+                ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+                  return CustomErrorWidget(errorDetails: errorDetails);
+                };
+                return child ?? const SizedBox.shrink();
+              },
+              title: AppStrings.appTitle,
+              themeMode: mode,
+              theme: AppThemes.lightTheme,
+              darkTheme: AppThemes.darkTheme,
+              debugShowCheckedModeBanner: false,
+              onGenerateRoute: Routes.generateRoute,
+              initialRoute: RoutesName.splash,
+            ),
           );
         },
       ),

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:stock_shift_pro/cors/configs/app_strings.dart';
 import 'package:stock_shift_pro/cors/configs/enums.dart';
 import 'package:stock_shift_pro/cors/widgets/buttons/material_button.dart';
-import 'package:stock_shift_pro/features/auth/widgets/logo_with_title.dart';
+import 'package:stock_shift_pro/features/auth/view/widgets/logo_with_title.dart';
 import 'package:stock_shift_pro/routes/route_names.dart';
+import 'package:stock_shift_pro/utils/constants/colors.dart';
 import 'package:stock_shift_pro/utils/constants/sizes.dart';
 import 'package:stock_shift_pro/utils/extensions/spacer_extension.dart';
 
@@ -45,6 +46,7 @@ class AuthScreen extends StatelessWidget {
                 16.height,
                 MaterialButtonWidget(
                   color: Colors.transparent,
+                  textColor: context.isDark ? AppPellet.white : AppPellet.black,
                   onPressed:
                       () => Navigator.pushNamed(
                         context,

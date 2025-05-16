@@ -12,7 +12,7 @@ class SessionController {
 
   bool get isLoggedIn => token != null && token!.isNotEmpty;
 
-  String? token, email, password;
+  String? token, email, password, fcmToken;
   UserRole? role;
   UserModel? user;
 
@@ -28,7 +28,18 @@ class SessionController {
     try {
       sharedPreferenceClass.setValue(SessionKey.USER, jsonEncode(response));
       sharedPreferenceClass.setValue(SessionKey.TOKEN, response.token);
-      ////storing login time
+      await SessionController().getUserFromPreference();
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+  Future<void> saveFCMTokenInPreference(String token) async {
+    try {
+      sharedPreferenceClass.setValue(SessionKey.DEVICE_TOKEN, token);
+      await SessionController().getUserFromPreference();
     } catch (e) {
       if (kDebugMode) {
         print(e);
@@ -57,6 +68,9 @@ class SessionController {
     try {
       var userData = await sharedPreferenceClass.readValue(SessionKey.USER);
       var token = await sharedPreferenceClass.readValue(SessionKey.TOKEN);
+      var fcmToken = await sharedPreferenceClass.readValue(
+        SessionKey.DEVICE_TOKEN,
+      );
       var email = await sharedPreferenceClass.readValue(SessionKey.EMAIL);
       var password = await sharedPreferenceClass.readValue(SessionKey.PASSWORD);
       if (userData != null && userData.isNotEmpty) {
@@ -66,6 +80,9 @@ class SessionController {
 
         user = userResponse.user;
         role = user?.role;
+      }
+      if (fcmToken != null && fcmToken.isNotEmpty) {
+        this.fcmToken = fcmToken;
       }
       if (token != null && token.isNotEmpty) {
         this.token = token;

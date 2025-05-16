@@ -12,6 +12,7 @@ class AppPellet {
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
   static const Color warning = Colors.red;
-
+  // -- Scafold back color
+  static const Color scafoldBackground = Color(0xFFF1F1F1);
   static const Color borderPrimary = Color.fromARGB(138, 158, 158, 158);
 }
