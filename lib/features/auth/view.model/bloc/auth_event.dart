@@ -8,18 +8,13 @@ class AppStartedEvent extends AuthEvent {
 }
 
 class LoggedInEvent extends AuthEvent {
-  final String mobile;
+  final String email;
   final String password;
-  final String deviceToken;
 
-  LoggedInEvent({
-    required this.deviceToken,
-    required this.mobile,
-    required this.password,
-  });
+  LoggedInEvent({required this.email, required this.password});
 
   @override
-  List<Object?> get props => [mobile, password];
+  List<Object?> get props => [email, password];
 }
 
 class LoggedOutEvent extends AuthEvent {

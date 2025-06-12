@@ -34,13 +34,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onLoggedIn(LoggedInEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoadingState());
     try {
-      final UserResponse response = await authRepository.loginApi({
-        'mobile': event.mobile,
-        'password': event.password,
-        'deviceToken': event.deviceToken,
-      });
+      final UserModel response = await authRepository.loginApi(
+        event.email,
+        event.password,
+      );
+
       await SessionController().saveUserInPreference(response);
-      emit(AuthenticatedState(user: response.user!, token: response.token!));
+
+      emit(
+        AuthenticatedState(user: response.user!, token: response.token ?? ''),
+      );
     } catch (e, stacktrace) {
       debugPrint(stacktrace.toString());
       emit(AuthErrorState(error: e.toString()));
@@ -49,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onLoggedOut(LoggedOutEvent event, Emitter<AuthState> emit) async {
     await SessionController().clearSession();
-    // locator<SocketService>().disconnect();
+    await authRepository.logoutApi(); // <-- you may add this in the repository
     emit(UnauthenticatedState());
   }
 

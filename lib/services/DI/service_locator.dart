@@ -12,10 +12,9 @@ final GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
   // Register API Service as a lazy singleton
-  locator.registerLazySingleton<BaseApiServices>(() => NetworkApiService());
-
-  //Register Web socket service as lazy singleton
-  // locator.registerLazySingleton<SocketService>(() => SocketService());
+  locator.registerLazySingleton<BaseFirebaseService>(
+    () => FirebaseApiService(),
+  );
 
   //Register Bloc with DI
   locator.registerFactory<AuthBloc>(() => AuthBloc(locator<AuthRepository>()));
@@ -23,7 +22,7 @@ Future<void> setupLocator() async {
 
   // Register Repository with dependency injection
   locator.registerFactory<AuthRepository>(
-    () => AuthHttpApiRepository(locator<BaseApiServices>()),
+    () => AuthHttpApiRepository(locator<BaseFirebaseService>()),
   );
 
   // Ensure all async dependencies are ready before proceeding

@@ -5,7 +5,7 @@ import 'package:erp/utils/constants/sizes.dart';
 class CustomDialogTheme {
   CustomDialogTheme._();
 
-  static DialogTheme lightDialogTheme = DialogTheme(
+  static DialogThemeData lightDialogTheme = DialogThemeData(
     backgroundColor: AppPellet.white,
     elevation: 8,
     shape: RoundedRectangleBorder(
@@ -19,7 +19,7 @@ class CustomDialogTheme {
     contentTextStyle: const TextStyle(fontSize: 14, color: Colors.black87),
   );
 
-  static DialogTheme darkDialogTheme = DialogTheme(
+  static DialogThemeData darkDialogTheme = DialogThemeData(
     backgroundColor: AppPellet.black,
     elevation: 8,
     shape: RoundedRectangleBorder(

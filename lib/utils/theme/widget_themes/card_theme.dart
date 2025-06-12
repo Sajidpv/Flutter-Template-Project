@@ -5,7 +5,7 @@ import 'package:erp/utils/constants/sizes.dart';
 class CustomCardTheme {
   CustomCardTheme._();
 
-  static CardTheme lightCardTheme = CardTheme(
+  static CardThemeData lightCardTheme = CardThemeData(
     color: AppPellet.white,
     elevation: 4,
     margin: const EdgeInsets.all(8),
@@ -15,7 +15,7 @@ class CustomCardTheme {
     ),
   );
 
-  static CardTheme darkCardTheme = CardTheme(
+  static CardThemeData darkCardTheme = CardThemeData(
     color: AppPellet.grey,
     elevation: 4,
     margin: const EdgeInsets.all(8),

@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:erp/features/auth/view.model/services/session_services.dart';
 
 class PushNotificationService {
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
@@ -13,7 +12,7 @@ class PushNotificationService {
     await _fcm.requestPermission(alert: true, badge: true, sound: true);
 
     // Get and print token
-    await _getTokenAndSaveToSession();
+    // await _getTokenAndSaveToSession();
 
     // Init local notifications (for Android foreground display)
     const androidInit = AndroidInitializationSettings('@mipmap/launcher_icon');
@@ -62,16 +61,16 @@ class PushNotificationService {
     );
   }
 
-  Future<void> _getTokenAndSaveToSession() async {
-    try {
-      String? token = await FirebaseMessaging.instance.getToken();
-      if (token != null) {
-        debugPrint("🔥 FCM Token: $token");
-        await SessionController().saveFCMTokenInPreference(token);
-        return;
-      }
-    } catch (e) {
-      debugPrint("❌ Token fetch failed: $e");
-    }
-  }
+  // Future<void> _getTokenAndSaveToSession() async {
+  //   try {
+  //     String? token = await FirebaseMessaging.instance.getToken();
+  //     if (token != null) {
+  //       debugPrint("🔥 FCM Token: $token");
+  //       await SessionController().saveFCMTokenInPreference(token);
+  //       return;
+  //     }
+  //   } catch (e) {
+  //     debugPrint("❌ Token fetch failed: $e");
+  //   }
+  // }
 }

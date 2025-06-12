@@ -8,7 +8,7 @@ class AdminHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text(SessionController().user!.role.toString()).toCenter(),
+      body: Text(SessionController().user!.name.toString()).toCenter(),
     );
   }
 }

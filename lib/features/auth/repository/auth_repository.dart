@@ -1,6 +1,7 @@
 import 'package:erp/features/auth/model/user.model.dart';
 
 abstract class AuthRepository {
-  Future<UserResponse> loginApi(dynamic data);
-  Future<dynamic> registerApi(dynamic data);
+  Future<UserModel> loginApi(String email, String password);
+  Future<dynamic> registerApi(Map<String, dynamic> data);
+  Future<void> logoutApi();
 }

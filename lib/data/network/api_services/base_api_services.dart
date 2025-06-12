@@ -1,35 +1,61 @@
-import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-abstract class BaseApiServices {
-  Future<dynamic> getGetApiResponse(String url, {bool isAuthorize = false});
+abstract class BaseFirebaseService {
+  // Auth
+  Future<UserCredential> signIn(String email, String password);
+  Future<UserCredential> signUp(String email, String password);
+  Future<void> signOut();
+  User? get currentUser;
 
-  Future<dynamic> getPostApiResponse(
-    String url,
-    dynamic data, {
-    bool isAuthorize = false,
-    String? token,
-    List<XFile>? imageFiles,
-    Map<String, String>? customHeader,
+  // Firestore
+  Future<void> setDocument({
+    required String collectionPath,
+    required String docId,
+    required Map<String, dynamic> data,
   });
 
-  Future<dynamic> getPutApiResponse(
-    String url,
-    dynamic data, {
-    bool isAuthorize = false,
-    Map<String, String>? customHeader,
+  Future<DocumentSnapshot> getDocument({
+    required String collectionPath,
+    required String docId,
   });
 
-  Future<dynamic> getPatchApiResponse(
-    String url,
-    dynamic data, {
-    bool isAuthorize = false,
-    Map<String, String>? customHeader,
+  Future<QuerySnapshot> getCollection(String collectionPath);
+
+  Future<QuerySnapshot> queryCollection({
+    required String collectionPath,
+    String? field,
+    dynamic isEqualTo,
+    String? orderByField,
+    bool descending = false,
+    int? limit,
   });
 
-  Future<dynamic> getDeleteApiResponse(
-    String url,
-    dynamic data, {
-    bool isAuthorize = false,
-    Map<String, String>? customHeader,
+  Future<void> runTransaction(
+    Future<void> Function(Transaction) transactionHandler,
+  );
+
+  Future<void> batchWrite(List<WriteModel> writes);
+
+  // Storage
+  Future<String> uploadFile(
+    String path,
+    String filePath, {
+    SettableMetadata? metadata,
+  });
+}
+
+class WriteModel {
+  final String collectionPath;
+  final String docId;
+  final Map<String, dynamic> data;
+  final bool isUpdate;
+
+  WriteModel({
+    required this.collectionPath,
+    required this.docId,
+    required this.data,
+    this.isUpdate = false,
   });
 }

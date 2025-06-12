@@ -1,37 +1,35 @@
-import 'package:erp/cors/configs/urls.dart';
 import 'package:erp/data/network/api_services/base_api_services.dart';
 import 'package:erp/features/auth/model/user.model.dart';
 import 'package:erp/features/auth/repository/auth_repository.dart';
 
 class AuthHttpApiRepository implements AuthRepository {
-  final BaseApiServices _apiServices;
+  final BaseFirebaseService _firebase;
 
-  AuthHttpApiRepository(this._apiServices);
-
+  AuthHttpApiRepository(this._firebase);
   @override
-  Future<UserResponse> loginApi(dynamic data) async {
-    dynamic response = await _apiServices.getPostApiResponse(
-      Urls.loginUrl,
-      data,
+  Future<UserModel> loginApi(String email, String password) async {
+    final userCred = await _firebase.signIn(email, password);
+    final userDoc = await _firebase.getDocument(
+      collectionPath: 'users',
+      docId: userCred.user!.uid,
     );
-    return UserResponse.fromJson(response['responseJson']);
+    return UserModel.fromFirebase(userDoc, userCred.user!.uid);
   }
 
-  // @override
-  // Future<dynamic> logoutApi() async {
-  //   dynamic response = await _apiServices.getPostApiResponse(
-  //     Urls.logoutUrl,
-  //     null,
-  //   );
-  //   return response['responseJson'];
-  // }
+  @override
+  Future<void> registerApi(Map<String, dynamic> data) async {
+    final userCred = await _firebase.signUp(data['email'], data['password']);
+    await _firebase.setDocument(
+      collectionPath: 'users',
+      docId: userCred.user!.uid,
+      data: {
+        'name': data['name'],
+        'email': data['email'],
+        'mobile': data['mobile'],
+      },
+    );
+  }
 
   @override
-  Future<dynamic> registerApi(dynamic data) async {
-    dynamic response = await _apiServices.getPostApiResponse(
-      Urls.registerUserUrl,
-      data,
-    );
-    return response['responseJson'];
-  }
+  Future<void> logoutApi() => _firebase.signOut();
 }
