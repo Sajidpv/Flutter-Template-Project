@@ -14,20 +14,10 @@ String getHomeScreen(UserRole? role) {
   switch (role) {
     case UserRole.admin:
       return RoutesName.admin_home;
-    case UserRole.supervisor:
-      return RoutesName.supervisor_home;
-    case UserRole.master:
-      return RoutesName.master_home;
-    case UserRole.tailor:
-      return RoutesName.tailor_home;
-    case UserRole.button:
-      return RoutesName.button_home;
-    case UserRole.threading:
-      return RoutesName.threading_home;
-    case UserRole.qc:
-      return RoutesName.qc_home;
-    case UserRole.customer:
-      return RoutesName.customer_home;
+    case UserRole.subAdmin:
+      return RoutesName.admin_home;
+    case UserRole.user:
+      return RoutesName.user_home;
     default:
       return RoutesName.login;
   }

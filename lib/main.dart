@@ -59,6 +59,14 @@ void main() async {
   //   });
   // }
 
+  if (kDebugMode) {
+    WidgetsBinding.instance.addTimingsCallback((timings) {
+      for (var frame in timings) {
+        debugPrint('Frame time: ${frame.buildDuration.inMilliseconds}');
+      }
+    });
+  }
+
   runApp(const MyApp());
 }
 
