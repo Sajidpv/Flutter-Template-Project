@@ -1,4 +1,5 @@
 import 'package:firebaseapp/data/network/api_services/base_api_services.dart';
+import 'package:firebaseapp/data/network/connectivity/connection.dart';
 import 'package:firebaseapp/features/auth/model/user.model.dart';
 import 'package:firebaseapp/features/auth/repository/auth_repository.dart';
 import 'package:firebaseapp/utils/local_storage/sqflite_local_db.dart';
@@ -10,24 +11,35 @@ class AuthApiRepository implements AuthRepository {
 
   @override
   Future<UserModel> loginApi(String email, String password) async {
-    try {
-      final userCred = await _firebase.signIn(email, password);
-      final userDoc = await _firebase.getDocument(
-        collectionPath: 'Users',
-        docId: userCred.user!.uid,
-      );
-      final user = UserModel.fromFirebase(userDoc, userCred.user!.uid);
+    await Connection().initConnection();
+    final isOnline = Connection().isConnected;
+    if (isOnline) {
+      try {
+        final userCred = await _firebase.signIn(email, password);
+        final userDoc = await _firebase.getDocument(
+          collectionPath: 'Users',
+          docId: userCred.user!.uid,
+        );
+        final user = UserModel.fromFirebase(userDoc, userCred.user!.uid);
 
-      // Cache user locally
-      await _localDb.setData('user', user.toJson());
-      return user;
-    } catch (e) {
-      // On failure, try local cache
+        // Cache user locally
+        await _localDb.setData('user', user.toJson());
+        return user;
+      } catch (e) {
+        // If online and login fails, fallback to local cache
+        final cachedJson = await _localDb.getData('user');
+        if (cachedJson != null) {
+          return UserModel.fromJson(cachedJson);
+        }
+        rethrow;
+      }
+    } else {
+      // Offline: Use cached user if available
       final cachedJson = await _localDb.getData('user');
       if (cachedJson != null) {
         return UserModel.fromJson(cachedJson);
       }
-      rethrow;
+      throw ('No internet connection and no cached user found.');
     }
   }
 
@@ -37,6 +49,11 @@ class AuthApiRepository implements AuthRepository {
 
   @override
   Future<void> registerApi(Map<String, dynamic> data) async {
+    await Connection().initConnection();
+    final isOnline = Connection().isConnected;
+    if (!isOnline) {
+      throw ('No internet connection.');
+    }
     try {
       final userCred = await _firebase.signUp(data['email'], data['password']);
 
