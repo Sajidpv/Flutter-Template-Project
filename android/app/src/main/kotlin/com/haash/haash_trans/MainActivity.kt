@@ -1,4 +1,4 @@
-package com.haash.erp
+package com.haash.firebaseapp
 
 import io.flutter.embedding.android.FlutterActivity
 

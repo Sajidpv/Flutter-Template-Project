@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:erp/features/auth/model/user.model.dart';
-import 'package:erp/features/auth/repository/auth_repository.dart';
-import 'package:erp/features/auth/view.model/services/session_services.dart';
+import 'package:firebaseapp/features/auth/model/user.model.dart';
+import 'package:firebaseapp/features/auth/repository/auth_repository.dart';
+import 'package:firebaseapp/features/auth/view.model/services/session_services.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -13,19 +13,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this.authRepository) : super(AuthInitialState()) {
     on<AppStartedEvent>(_onAppStarted);
     on<LoggedInEvent>(_onLoggedIn);
+    on<EmailVerificationEvent>(_onEmailVerificationEvent);
     on<LoggedOutEvent>(_onLoggedOut);
     on<SignUpEvent>(_onSignUp);
   }
 
   void _onAppStarted(AppStartedEvent event, Emitter<AuthState> emit) async {
     await SessionController().getUserFromPreference();
-    if (SessionController().isLoggedIn && SessionController().role != null) {
-      emit(
-        AuthenticatedState(
-          user: SessionController().user!,
-          token: SessionController().token ?? '',
-        ),
-      );
+    if (SessionController().isLoggedIn) {
+      if (SessionController().isVerified == true) {
+        emit(AuthenticatedState(user: SessionController().user!));
+      } else {
+        emit(EmailVerificationState());
+      }
     } else {
       emit(UnauthenticatedState());
     }
@@ -38,12 +38,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.email,
         event.password,
       );
-
       await SessionController().saveUserInPreference(response);
 
-      emit(
-        AuthenticatedState(user: response.user!, token: response.token ?? ''),
-      );
+      emit(AuthenticatedState(user: response));
+    } catch (e, stacktrace) {
+      debugPrint(stacktrace.toString());
+      emit(AuthErrorState(error: e.toString()));
+    }
+  }
+
+  void _onEmailVerificationEvent(
+    EmailVerificationEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(AuthLoadingState());
+    try {
+      await authRepository.emailVerificationApi();
+      emit(EmailVerificationState());
     } catch (e, stacktrace) {
       debugPrint(stacktrace.toString());
       emit(AuthErrorState(error: e.toString()));
@@ -52,7 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onLoggedOut(LoggedOutEvent event, Emitter<AuthState> emit) async {
     await SessionController().clearSession();
-    await authRepository.logoutApi(); // <-- you may add this in the repository
+    await authRepository.logoutApi();
     emit(UnauthenticatedState());
   }
 

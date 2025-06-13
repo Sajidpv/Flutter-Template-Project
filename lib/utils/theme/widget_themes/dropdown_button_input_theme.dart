@@ -8,22 +8,25 @@ class CustomDropDownTheme {
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppPellet.borderPrimary.withValues(alpha: .5),
+          color: AppPellet.bordfirebaseapprimary.withValues(alpha: .5),
           width: 1.0,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppPellet.borderPrimary.withValues(alpha: .1),
+          color: AppPellet.bordfirebaseapprimary.withValues(alpha: .1),
           width: 1.0,
         ),
       ),
       focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: AppPellet.borderPrimary, width: 2.0),
+        borderSide: BorderSide(
+          color: AppPellet.bordfirebaseapprimary,
+          width: 2.0,
+        ),
       ),
       border: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppPellet.borderPrimary.withValues(alpha: .5),
+          color: AppPellet.bordfirebaseapprimary.withValues(alpha: .5),
           width: 1.0,
         ),
       ),
@@ -34,22 +37,25 @@ class CustomDropDownTheme {
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppPellet.borderPrimary.withValues(alpha: .5),
+          color: AppPellet.bordfirebaseapprimary.withValues(alpha: .5),
           width: 1.0,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppPellet.borderPrimary.withValues(alpha: .1),
+          color: AppPellet.bordfirebaseapprimary.withValues(alpha: .1),
           width: 1.0,
         ),
       ),
       focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: AppPellet.borderPrimary, width: 2.0),
+        borderSide: BorderSide(
+          color: AppPellet.bordfirebaseapprimary,
+          width: 2.0,
+        ),
       ),
       border: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppPellet.borderPrimary.withValues(alpha: .5),
+          color: AppPellet.bordfirebaseapprimary.withValues(alpha: .5),
           width: 1.0,
         ),
       ),

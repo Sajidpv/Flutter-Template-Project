@@ -1,21 +1,20 @@
 import 'package:awesome_extensions/awesome_extensions_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:erp/cors/configs/app_strings.dart';
-import 'package:erp/cors/configs/enums.dart';
-import 'package:erp/cors/widgets/buttons/material_button.dart';
-import 'package:erp/cors/widgets/inputs/texts/text_fields.dart';
-import 'package:erp/features/auth/model/user.model.dart';
-import 'package:erp/features/auth/view.model/bloc/auth_bloc.dart';
-import 'package:erp/features/auth/view.model/services/session_services.dart';
-import 'package:erp/features/auth/view/widgets/logo_with_title.dart';
-import 'package:erp/routes/route_names.dart';
-import 'package:erp/utils/constants/colors.dart';
-import 'package:erp/utils/constants/sizes.dart';
-import 'package:erp/utils/extensions/context_extensions.dart';
-import 'package:erp/utils/helpers/navigation_helper.dart';
-import 'package:erp/utils/popups/utils.dart';
-import 'package:erp/utils/validators/validation.dart';
+import 'package:firebaseapp/cors/configs/app_strings.dart';
+import 'package:firebaseapp/cors/configs/enums.dart';
+import 'package:firebaseapp/cors/widgets/buttons/material_button.dart';
+import 'package:firebaseapp/cors/widgets/inputs/texts/text_fields.dart';
+import 'package:firebaseapp/features/auth/model/user.model.dart';
+import 'package:firebaseapp/features/auth/view.model/bloc/auth_bloc.dart';
+import 'package:firebaseapp/features/auth/view/widgets/logo_with_title.dart';
+import 'package:firebaseapp/routes/route_names.dart';
+import 'package:firebaseapp/utils/constants/colors.dart';
+import 'package:firebaseapp/utils/constants/sizes.dart';
+import 'package:firebaseapp/utils/extensions/context_extensions.dart';
+import 'package:firebaseapp/utils/helpers/navigation_helper.dart';
+import 'package:firebaseapp/utils/popups/utils.dart';
+import 'package:firebaseapp/utils/validators/validation.dart';
 
 class SignUpScreen extends StatelessWidget {
   final UserRole role;
@@ -102,25 +101,20 @@ class SignUpScreen extends StatelessWidget {
                                   context.authBloc.add(
                                     isLogin
                                         ? LoggedInEvent(
-                                          mobile: phoneController.text.trim(),
-                                          deviceToken:
-                                              SessionController().fcmToken ??
-                                              '',
+                                          email: phoneController.text.trim(),
+
                                           password:
                                               passwordController.text.trim(),
                                         )
                                         : SignUpEvent(
                                           user: UserModel(
                                             name: nameController.text,
-                                            mobile: int.parse(
-                                              phoneController.text,
-                                            ),
+                                            mobile: phoneController.text,
+                                            email: nameController.text,
                                             role: role,
-                                            accessCode:
-                                                accesscodeController.text
-                                                    .trim(),
                                             password:
                                                 passwordController.text.trim(),
+                                            isVerified: false,
                                           ),
                                         ),
                                   );

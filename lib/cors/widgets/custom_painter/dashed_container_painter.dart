@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:erp/utils/constants/colors.dart';
-import 'package:erp/utils/constants/sizes.dart';
+import 'package:firebaseapp/utils/constants/colors.dart';
+import 'package:firebaseapp/utils/constants/sizes.dart';
 
-class DashedBorderPainter extends CustomPainter {
+class DashedBordfirebaseappainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint =

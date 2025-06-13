@@ -1,8 +1,8 @@
 import 'package:awesome_extensions/awesome_extensions_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:erp/utils/constants/colors.dart';
-import 'package:erp/utils/constants/sizes.dart';
-import 'package:erp/utils/extensions/constraints_extensions.dart';
+import 'package:firebaseapp/utils/constants/colors.dart';
+import 'package:firebaseapp/utils/constants/sizes.dart';
+import 'package:firebaseapp/utils/extensions/constraints_extensions.dart';
 
 class CustomContainerWidget extends StatelessWidget {
   final Widget? child;
@@ -26,7 +26,7 @@ class CustomContainerWidget extends StatelessWidget {
     this.height,
     this.showBorder = false,
     this.showShadow = false,
-    this.borderColor = AppPellet.borderPrimary,
+    this.borderColor = AppPellet.bordfirebaseapprimary,
     this.backgroundColor = AppPellet.white,
     this.margin,
     this.padding = const EdgeInsets.all(AppSizes.md),

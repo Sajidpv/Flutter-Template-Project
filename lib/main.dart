@@ -1,18 +1,21 @@
+import 'package:firebaseapp/data/network/connectivity/connection.dart';
+import 'package:firebaseapp/services/firebase/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:erp/cors/configs/app_strings.dart';
-import 'package:erp/cors/widgets/state_management/cubit/theme_cubit.dart';
-import 'package:erp/features/auth/view.model/bloc/auth_bloc.dart';
-import 'package:erp/routes/route_names.dart';
-import 'package:erp/routes/routes.dart';
-import 'package:erp/services/bloc/bloc_observers.dart';
-import 'package:erp/services/bloc/bloc_providers.dart';
-import 'package:erp/services/DI/service_locator.dart';
-import 'package:erp/utils/exceptions/custom_error_handling_widget.dart';
-import 'package:erp/utils/theme/theme.dart';
+import 'package:firebaseapp/cors/configs/app_strings.dart';
+import 'package:firebaseapp/cors/widgets/state_management/cubit/theme_cubit.dart';
+import 'package:firebaseapp/features/auth/view.model/bloc/auth_bloc.dart';
+import 'package:firebaseapp/routes/route_names.dart';
+import 'package:firebaseapp/routes/routes.dart';
+import 'package:firebaseapp/services/bloc/bloc_observers.dart';
+import 'package:firebaseapp/services/bloc/bloc_providers.dart';
+import 'package:firebaseapp/services/DI/service_locator.dart';
+import 'package:firebaseapp/utils/exceptions/custom_error_handling_widget.dart';
+import 'package:firebaseapp/utils/theme/theme.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -35,7 +38,7 @@ void main() async {
   // };
   WidgetsFlutterBinding.ensureInitialized();
   //Init firebase with options
-  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //await PushNotificationService().init();
 
   /// initialize hydrated bloc
@@ -47,7 +50,8 @@ void main() async {
               (await getApplicationDocumentsDirectory()).path,
             ),
   );
-
+  //initialize internet connection
+  Connection().initConnection();
   // Setup Service Locator
   await setupLocator();
 
@@ -59,13 +63,13 @@ void main() async {
   //   });
   // }
 
-  if (kDebugMode) {
-    WidgetsBinding.instance.addTimingsCallback((timings) {
-      for (var frame in timings) {
-        debugPrint('Frame time: ${frame.buildDuration.inMilliseconds}');
-      }
-    });
-  }
+  // if (kDebugMode) {
+  //   WidgetsBinding.instance.addTimingsCallback((timings) {
+  //     for (var frame in timings) {
+  //       debugPrint('Frame time: ${frame.buildDuration.inMilliseconds}');
+  //     }
+  //   });
+  // }
 
   runApp(const MyApp());
 }

@@ -5,7 +5,7 @@ class Urls {
       '${AppConfig.BASE_URL}/admin/filterAndSortProducts';
   // -- User routes -- //
   static const String registerUserUrl = '${AppConfig.BASE_URL}/user/';
-  static const String editUserProfileByAdminUrl =
+  static const String editUsfirebaseapprofileByAdminUrl =
       '${AppConfig.BASE_URL}/user/edit-profile';
   static const String addSubAdminByAdminUrl =
       '${AppConfig.BASE_URL}/user/sub-admin';

@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:erp/features/user/view.model/bloc/user_bloc.dart';
-// import 'package:erp/services/websocket/socket_service.dart';
+// import 'package:firebaseapp/features/user/view.model/bloc/user_bloc.dart';
+// import 'package:firebaseapp/services/websocket/socket_service.dart';
 
 // /// Central manager that listens for real-time socket events
 // /// and dispatches corresponding BLoC events.

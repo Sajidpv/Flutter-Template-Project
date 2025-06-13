@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243788218913",
+    "project_id": "expirymate-61a2a",
+    "storage_bucket": "expirymate-61a2a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243788218913:android:a78535286cf8b03cf61960",
+        "android_client_info": {
+          "package_name": "com.sajid.expiry.mate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu5vwKyScxRVW0hwnkS_UFLg1JA2d5opI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

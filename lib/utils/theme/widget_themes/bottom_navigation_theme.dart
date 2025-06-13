@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:erp/utils/constants/colors.dart';
+import 'package:firebaseapp/utils/constants/colors.dart';
 
 class CustomBottomNavBarTheme {
   CustomBottomNavBarTheme._();

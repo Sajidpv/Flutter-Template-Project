@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:erp/utils/constants/sizes.dart';
+import 'package:firebaseapp/utils/constants/sizes.dart';
 
 class CustomCircularImage extends StatelessWidget {
   const CustomCircularImage({

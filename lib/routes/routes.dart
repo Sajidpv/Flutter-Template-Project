@@ -1,10 +1,11 @@
+import 'package:firebaseapp/features/auth/view/screens/email_verification_page.dart';
 import 'package:flutter/material.dart';
-import 'package:erp/cors/configs/enums.dart';
-import 'package:erp/features/auth/view/screens/auth_screen.dart';
-import 'package:erp/features/auth/view/screens/signup_screen.dart';
-import 'package:erp/features/auth/view/screens/splash_screen.dart';
-import 'package:erp/features/home/view/screens/admin_home_screen.dart';
-import 'package:erp/features/home/view/screens/user_home_screen.dart';
+import 'package:firebaseapp/cors/configs/enums.dart';
+import 'package:firebaseapp/features/auth/view/screens/auth_screen.dart';
+import 'package:firebaseapp/features/auth/view/screens/signup_screen.dart';
+import 'package:firebaseapp/features/auth/view/screens/splash_screen.dart';
+import 'package:firebaseapp/features/home/view/screens/admin_home_screen.dart';
+import 'package:firebaseapp/features/home/view/screens/user_home_screen.dart';
 
 import 'route_names.dart';
 
@@ -18,6 +19,10 @@ class Routes {
       case RoutesName.auth:
         return MaterialPageRoute(
           builder: (BuildContext context) => const AuthScreen(),
+        );
+      case RoutesName.verify:
+        return MaterialPageRoute(
+          builder: (BuildContext context) => const EmailVerificationPage(),
         );
 
       case RoutesName.login:

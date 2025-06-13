@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:erp/cors/widgets/state_management/bloc/file_picker_bloc.dart';
-import 'package:erp/cors/widgets/state_management/cubit/theme_cubit.dart';
-import 'package:erp/features/auth/view.model/bloc/auth_bloc.dart';
+import 'package:firebaseapp/cors/widgets/state_management/bloc/file_picker_bloc.dart';
+import 'package:firebaseapp/cors/widgets/state_management/cubit/theme_cubit.dart';
+import 'package:firebaseapp/features/auth/view.model/bloc/auth_bloc.dart';
 
-import 'package:erp/services/DI/service_locator.dart';
+import 'package:firebaseapp/services/DI/service_locator.dart';
 
 class BlocProviders extends StatelessWidget {
   final Widget child;

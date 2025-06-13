@@ -1,8 +1,13 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:erp/data/network/api_services/base_api_services.dart';
+import 'package:firebaseapp/data/network/api_services/base_api_services.dart';
+import 'package:firebaseapp/utils/exceptions/firebase_auth_exceptions.dart';
+import 'package:firebaseapp/utils/exceptions/firebase_exceptions.dart';
+import 'package:firebaseapp/utils/exceptions/format_exceptions.dart';
+import 'package:firebaseapp/utils/exceptions/platform_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 
 class FirebaseApiService implements BaseFirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,15 +17,26 @@ class FirebaseApiService implements BaseFirebaseService {
   // ------------------ Auth ------------------
   @override
   Future<UserCredential> signIn(String email, String password) {
-    return _auth.signInWithEmailAndPassword(email: email, password: password);
+    return _tryFirestoreCall(() {
+      return _auth.signInWithEmailAndPassword(email: email, password: password);
+    });
   }
 
   @override
   Future<UserCredential> signUp(String email, String password) {
-    return _auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    return _tryFirestoreCall(() {
+      return _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    });
+  }
+
+  @override
+  Future<void> sendEmailVerification() {
+    return _tryFirestoreCall(() async {
+      return _auth.currentUser?.sendEmailVerification();
+    });
   }
 
   @override
@@ -29,6 +45,16 @@ class FirebaseApiService implements BaseFirebaseService {
   @override
   User? get currentUser => _auth.currentUser;
 
+  @override
+  Future<User?> reloadUser() async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      await user.reload();
+      return _auth.currentUser;
+    }
+    return null;
+  }
+
   // ------------------ Firestore ------------------
   @override
   Future<void> setDocument({
@@ -36,7 +62,9 @@ class FirebaseApiService implements BaseFirebaseService {
     required String docId,
     required Map<String, dynamic> data,
   }) {
-    return _firestore.collection(collectionPath).doc(docId).set(data);
+    return _tryFirestoreCall(() {
+      return _firestore.collection(collectionPath).doc(docId).set(data);
+    });
   }
 
   @override
@@ -44,7 +72,9 @@ class FirebaseApiService implements BaseFirebaseService {
     required String collectionPath,
     required String docId,
   }) {
-    return _firestore.collection(collectionPath).doc(docId).get();
+    return _tryFirestoreCall(() {
+      return _firestore.collection(collectionPath).doc(docId).get();
+    });
   }
 
   @override
@@ -114,5 +144,22 @@ class FirebaseApiService implements BaseFirebaseService {
     final ref = _storage.ref().child(path);
     final uploadTask = await ref.putFile(file, metadata);
     return await uploadTask.ref.getDownloadURL();
+  }
+
+  // 🔁 Common error handler
+  Future<T> _tryFirestoreCall<T>(Future<T> Function() call) async {
+    try {
+      return await call();
+    } on FirebaseAuthException catch (e) {
+      throw SFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw SFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw SPlatformException(e.code).message;
+    } on FormatException {
+      throw SFormatException();
+    } catch (e) {
+      throw 'Something went wrong! Please try again.';
+    }
   }
 }

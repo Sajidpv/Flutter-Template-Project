@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:erp/utils/theme/widget_themes/alert_dialog_theme.dart';
-import 'package:erp/utils/theme/widget_themes/bottom_navigation_theme.dart';
-import 'package:erp/utils/theme/widget_themes/card_theme.dart';
+import 'package:firebaseapp/utils/theme/widget_themes/alert_dialog_theme.dart';
+import 'package:firebaseapp/utils/theme/widget_themes/bottom_navigation_theme.dart';
+import 'package:firebaseapp/utils/theme/widget_themes/card_theme.dart';
 import '../constants/colors.dart';
 import 'widget_themes/appbar_theme.dart';
 import 'widget_themes/bottom_sheet_theme.dart';

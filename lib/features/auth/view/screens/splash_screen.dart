@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:erp/features/auth/view.model/bloc/auth_bloc.dart';
-import 'package:erp/routes/route_names.dart';
-import 'package:erp/utils/constants/app_images.dart';
-import 'package:erp/utils/helpers/navigation_helper.dart';
+import 'package:firebaseapp/features/auth/view.model/bloc/auth_bloc.dart';
+import 'package:firebaseapp/routes/route_names.dart';
+import 'package:firebaseapp/utils/constants/app_images.dart';
+import 'package:firebaseapp/utils/helpers/navigation_helper.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -17,6 +17,9 @@ class SplashScreen extends StatelessWidget {
         Timer(const Duration(seconds: 2), () {
           if (state is AuthenticatedState) {
             navigateUserByRole(context, state.user.role);
+          }
+          if (state is EmailVerificationState) {
+            Navigator.pushReplacementNamed(context, RoutesName.verify);
           }
           if (state is UnauthenticatedState) {
             Navigator.pushReplacementNamed(context, RoutesName.auth);

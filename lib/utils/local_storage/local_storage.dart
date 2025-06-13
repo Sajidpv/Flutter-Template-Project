@@ -1,3 +1,4 @@
+import 'package:crypt/crypt.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LocalStorage {
@@ -20,5 +21,22 @@ class LocalStorage {
 
   Future<void> clearAll() async {
     await storage.deleteAll();
+  }
+
+  Future<void> encryptAndStorePassword(String password) async {
+    await storage.write(
+      key: 'password',
+      value: Crypt.sha256(password).toString(),
+    );
+  }
+
+  Future<bool> decryptAndCheckPassword(String password) async {
+    final hashedPassword = await storage.read(key: 'password');
+    if (hashedPassword != null) {
+      final h = Crypt(hashedPassword);
+      return h.match(password) ? true : false;
+    } else {
+      return false;
+    }
   }
 }

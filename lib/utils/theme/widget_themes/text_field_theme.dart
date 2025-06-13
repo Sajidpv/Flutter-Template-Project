@@ -75,7 +75,10 @@ class CustomTextFormFieldTheme {
     ),
     enabledBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(AppSizes.inputFieldMinimumRadius),
-      borderSide: const BorderSide(width: 1, color: AppPellet.borderPrimary),
+      borderSide: const BorderSide(
+        width: 1,
+        color: AppPellet.bordfirebaseapprimary,
+      ),
     ),
     focusedBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(AppSizes.inputFieldMinimumRadius),

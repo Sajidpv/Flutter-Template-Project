@@ -12,7 +12,7 @@ enum NotificationTypeEnum {
   orders,
   stockTransfer,
   userRequest,
-  orderProcessed,
+  ordfirebaseapprocessed,
   profileUpdated,
 }
 
@@ -79,7 +79,7 @@ NotificationTypeEnum notificationTypeEnumFromString(String type) {
     case 'user-request':
       return NotificationTypeEnum.userRequest;
     case 'order-processed':
-      return NotificationTypeEnum.orderProcessed;
+      return NotificationTypeEnum.ordfirebaseapprocessed;
     case 'profile-updated':
       return NotificationTypeEnum.profileUpdated;
     default:
@@ -170,7 +170,7 @@ String? notificationTypeEnumToString(NotificationTypeEnum? type) {
       return 'stock-transfer';
     case NotificationTypeEnum.userRequest:
       return 'user-request';
-    case NotificationTypeEnum.orderProcessed:
+    case NotificationTypeEnum.ordfirebaseapprocessed:
       return 'order-processed';
     case NotificationTypeEnum.profileUpdated:
       return 'profile-updated';

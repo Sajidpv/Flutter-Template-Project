@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:erp/utils/constants/colors.dart';
-import 'package:erp/utils/constants/sizes.dart';
+import 'package:firebaseapp/utils/constants/colors.dart';
+import 'package:firebaseapp/utils/constants/sizes.dart';
 
 class CustomCardTheme {
   CustomCardTheme._();

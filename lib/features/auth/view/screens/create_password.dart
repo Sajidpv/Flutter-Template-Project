@@ -1,6 +1,6 @@
-// import 'package:erp/cors/configs/app_strings.dart';
-// import 'package:erp/utils/extensions/context_extensions.dart';
-// import 'package:erp/utils/extensions/spacer_extension.dart';
+// import 'package:firebaseapp/cors/configs/app_strings.dart';
+// import 'package:firebaseapp/utils/extensions/context_extensions.dart';
+// import 'package:firebaseapp/utils/extensions/spacer_extension.dart';
 // import 'package:flutter/material.dart';
 
 // class CreatePasswordScreen extends StatelessWidget {

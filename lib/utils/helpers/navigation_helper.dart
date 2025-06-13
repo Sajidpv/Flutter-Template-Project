@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:erp/cors/configs/enums.dart';
-import 'package:erp/routes/route_names.dart';
+import 'package:firebaseapp/cors/configs/enums.dart';
+import 'package:firebaseapp/routes/route_names.dart';
 
 void navigateUserByRole(BuildContext context, UserRole? role) {
   Navigator.pushNamedAndRemoveUntil(

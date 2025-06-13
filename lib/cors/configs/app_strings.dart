@@ -3,7 +3,7 @@
 var thisYear = DateTime.now().year.toString();
 
 class AppStrings {
-  static const String appTitle = 'StockShift PRO.';
+  static const String appTitle = 'Firebase App.';
 
   ///////////////ERROR messages////////////////////////
   static const String netWorkError =

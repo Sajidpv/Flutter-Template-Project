@@ -9,12 +9,18 @@ class AuthInitialState extends AuthState {
 
 class AuthenticatedState extends AuthState {
   final UserModel user;
-  final String token;
 
-  AuthenticatedState({required this.user, required this.token});
+  AuthenticatedState({required this.user});
 
   @override
-  List<Object?> get props => [user, token];
+  List<Object?> get props => [user];
+}
+
+class EmailVerificationState extends AuthState {
+  EmailVerificationState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class UnauthenticatedState extends AuthState {

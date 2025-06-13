@@ -1,6 +1,6 @@
 import 'package:awesome_extensions/awesome_extensions_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:erp/utils/constants/sizes.dart';
+import 'package:firebaseapp/utils/constants/sizes.dart';
 
 class SizeHelper {
   static double screenWidth = 0;

@@ -5,7 +5,7 @@ import 'package:another_flushbar/flushbar_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:erp/cors/configs/app_strings.dart';
+import 'package:firebaseapp/cors/configs/app_strings.dart';
 
 class Utils {
   // we will use this function to shift focus from one text field to another text field

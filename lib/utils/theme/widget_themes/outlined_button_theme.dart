@@ -12,7 +12,7 @@ class CustomOutlinedButtonTheme {
     style: OutlinedButton.styleFrom(
       elevation: 0,
       foregroundColor: AppPellet.black,
-      side: const BorderSide(color: AppPellet.borderPrimary),
+      side: const BorderSide(color: AppPellet.bordfirebaseapprimary),
       textStyle: const TextStyle(
         fontSize: 16,
         color: AppPellet.black,
@@ -32,7 +32,7 @@ class CustomOutlinedButtonTheme {
   static final darkOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       foregroundColor: AppPellet.white,
-      side: const BorderSide(color: AppPellet.borderPrimary),
+      side: const BorderSide(color: AppPellet.bordfirebaseapprimary),
       textStyle: const TextStyle(
         fontSize: 16,
         color: AppPellet.white,

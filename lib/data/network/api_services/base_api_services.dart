@@ -6,8 +6,11 @@ abstract class BaseFirebaseService {
   // Auth
   Future<UserCredential> signIn(String email, String password);
   Future<UserCredential> signUp(String email, String password);
+  Future<void> sendEmailVerification();
   Future<void> signOut();
   User? get currentUser;
+
+  Future<User?> reloadUser();
 
   // Firestore
   Future<void> setDocument({

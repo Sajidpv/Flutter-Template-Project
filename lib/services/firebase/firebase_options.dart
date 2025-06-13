@@ -50,19 +50,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAjiNERefCyElyxBxMJxqopgb8bUyUi27o',
-    appId: '1:1060554518243:android:f5106e51e67e0fa922dfd6',
-    messagingSenderId: '1060554518243',
-    projectId: 'stockshift-pro',
-    storageBucket: 'stockshift-pro.firebasestorage.app',
+    apiKey: 'AIzaSyBu5vwKyScxRVW0hwnkS_UFLg1JA2d5opI',
+    appId: '1:243788218913:android:a78535286cf8b03cf61960',
+    messagingSenderId: '243788218913',
+    projectId: 'expirymate-61a2a',
+    storageBucket: 'expirymate-61a2a.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyChQgYIZCnUbBKYDZubTL5Yoi7tOaG9Bc0',
-    appId: '1:1060554518243:ios:d9ed346f3d49060722dfd6',
-    messagingSenderId: '1060554518243',
-    projectId: 'stockshift-pro',
-    storageBucket: 'stockshift-pro.firebasestorage.app',
+    apiKey: 'AIzaSyCs1TDQ72ie2P2gUzAJh6wCren5RAJG38U',
+    appId: '1:243788218913:ios:70b5dcc48246415ef61960',
+    messagingSenderId: '243788218913',
+    projectId: 'expirymate-61a2a',
+    storageBucket: 'expirymate-61a2a.firebasestorage.app',
+    androidClientId: '243788218913-8emvojo9dbii1qtqeqi3osddmns6vccc.apps.googleusercontent.com',
+    iosClientId: '243788218913-e92b1c3823e6l9bb514ccc5jqs0uo37n.apps.googleusercontent.com',
     iosBundleId: 'com.haash.haashTrans',
   );
+
 }

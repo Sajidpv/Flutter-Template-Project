@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:erp/features/auth/model/user.model.dart';
-import 'package:erp/features/auth/view.model/services/session_services.dart';
-import 'package:erp/features/user/repository/user_repository.dart';
+import 'package:firebaseapp/features/auth/model/user.model.dart';
+import 'package:firebaseapp/features/auth/view.model/services/session_services.dart';
+import 'package:firebaseapp/features/user/repository/user_repository.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
