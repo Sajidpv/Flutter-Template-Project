@@ -8,7 +8,8 @@ class UserModel {
   final String mobile;
   final UserRole? role;
   final String? password;
-  final bool isVerified;
+  final bool emailVerified;
+  String? photoUrl;
 
   UserModel({
     this.uid,
@@ -17,7 +18,8 @@ class UserModel {
     required this.mobile,
     required this.role,
     this.password,
-    required this.isVerified,
+    required this.emailVerified,
+    this.photoUrl,
   });
 
   factory UserModel.fromFirebase(DocumentSnapshot doc, String uid) {
@@ -34,7 +36,8 @@ class UserModel {
       email: data['email'] ?? '',
       mobile: data['mobile'] ?? '',
       role: data['role'] ?? '',
-      isVerified: data['isVerified'] ?? false,
+      emailVerified: data['isVerified'] ?? false,
+      photoUrl: data['photoUrl'],
     );
   }
 
@@ -46,7 +49,8 @@ class UserModel {
       mobile: map['mobile'] as String,
       role: map['role'],
       password: map['password'] != null ? map['password'] as String : null,
-      isVerified: false,
+      photoUrl: map['photoUrl'],
+      emailVerified: false,
     );
   }
 
@@ -56,7 +60,8 @@ class UserModel {
     email: '',
     mobile: '',
     role: null,
-    isVerified: false,
+    photoUrl: '',
+    emailVerified: false,
   );
 
   Map<String, dynamic> toJson() {
@@ -65,6 +70,7 @@ class UserModel {
       'name': name,
       'email': email,
       'mobile': mobile,
+      'photoUrl': photoUrl,
       'role': role,
     };
   }

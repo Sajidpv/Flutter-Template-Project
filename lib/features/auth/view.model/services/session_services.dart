@@ -18,7 +18,7 @@ class SessionController {
   bool get isLoggedIn => _userResponse != null;
   UserModel? get user => _userResponse;
   UserRole? get role => _userResponse?.role;
-  bool? get isVerified => _userResponse?.isVerified;
+  bool? get isVerified => _userResponse?.emailVerified;
 
   Future<void> saveUserInPreference(UserModel response) async {
     sharedPreferenceClass.setValue(SessionKey.USER, jsonEncode(response));

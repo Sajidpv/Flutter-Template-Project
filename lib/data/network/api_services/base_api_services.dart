@@ -5,8 +5,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 abstract class BaseFirebaseService {
   // Auth
   Future<UserCredential> signIn(String email, String password);
+  Future<UserCredential> googleAuth();
   Future<UserCredential> signUp(String email, String password);
   Future<void> sendEmailVerification();
+  Future<void> sendPasswordResetLink(String email);
   Future<void> signOut();
   User? get currentUser;
 

@@ -114,7 +114,7 @@ class SignUpScreen extends StatelessWidget {
                                             role: role,
                                             password:
                                                 passwordController.text.trim(),
-                                            isVerified: false,
+                                            emailVerified: false,
                                           ),
                                         ),
                                   );

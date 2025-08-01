@@ -17,7 +17,25 @@ class LoggedInEvent extends AuthEvent {
   List<Object?> get props => [email, password];
 }
 
-class EmailVerificationEvent extends AuthEvent {
+class GoogleLoginEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class SendEmailVerificationEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class ResetPasswordEvent extends AuthEvent {
+  final String email;
+
+  ResetPasswordEvent({required this.email});
+  @override
+  List<Object?> get props => [email];
+}
+
+class VerifyEmailEvent extends AuthEvent {
   @override
   List<Object?> get props => [];
 }

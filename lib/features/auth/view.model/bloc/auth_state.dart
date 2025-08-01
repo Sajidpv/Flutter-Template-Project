@@ -23,6 +23,20 @@ class EmailVerificationState extends AuthState {
   List<Object?> get props => [];
 }
 
+class PasswordResetLinkSendState extends AuthState {
+  PasswordResetLinkSendState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class EmailVerificationSuccessState extends AuthState {
+  EmailVerificationSuccessState();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class UnauthenticatedState extends AuthState {
   @override
   List<Object?> get props => [];

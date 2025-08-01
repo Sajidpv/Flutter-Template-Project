@@ -44,8 +44,54 @@ class AuthApiRepository implements AuthRepository {
   }
 
   @override
+  Future<UserModel> googleLoginApi() async {
+    await Connection().initConnection();
+    final isOnline = Connection().isConnected;
+    if (isOnline) {
+      try {
+        final userCred = await _firebase.googleAuth();
+        final newUser = UserModel(
+          uid: userCred.user?.uid ?? '',
+          name: userCred.user?.displayName ?? '',
+          email: userCred.user?.email ?? '',
+          mobile: userCred.user?.phoneNumber ?? '',
+          role: null,
+          emailVerified: userCred.user?.emailVerified ?? false,
+          photoUrl: userCred.user?.photoURL,
+        );
+        await _firebase.setDocument(
+          collectionPath: 'Users',
+          docId: userCred.user?.uid ?? '',
+          data: newUser.toJson(),
+        );
+        // Cache user locally
+        await _localDb.setData('user', newUser.toJson());
+        return newUser;
+      } catch (e) {
+        // If online and login fails, fallback to local cache
+        final cachedJson = await _localDb.getData('user');
+        if (cachedJson != null) {
+          return UserModel.fromJson(cachedJson);
+        }
+        rethrow;
+      }
+    } else {
+      // Offline: Use cached user if available
+      final cachedJson = await _localDb.getData('user');
+      if (cachedJson != null) {
+        return UserModel.fromJson(cachedJson);
+      }
+      throw ('No internet connection and no cached user found.');
+    }
+  }
+
+  @override
   Future emailVerificationApi() async =>
       await _firebase.sendEmailVerification();
+
+  @override
+  Future resetPasswordApi(String email) async =>
+      await _firebase.sendPasswordResetLink(email);
 
   @override
   Future<void> registerApi(Map<String, dynamic> data) async {
@@ -63,7 +109,7 @@ class AuthApiRepository implements AuthRepository {
         email: data['email'],
         mobile: data['mobile'],
         role: data['role'],
-        isVerified: false,
+        emailVerified: false,
       );
       await _firebase.setDocument(
         collectionPath: 'Users',
@@ -81,5 +127,35 @@ class AuthApiRepository implements AuthRepository {
   Future<void> logoutApi() async {
     await _firebase.signOut();
     await _localDb.deleteData('user');
+  }
+
+  @override
+  UserModel? getCurrentUserApi() {
+    final user = _firebase.currentUser;
+    if (user == null) return null;
+
+    return UserModel(
+      uid: user.uid,
+      name: user.displayName ?? '',
+      email: user.email ?? '',
+      mobile: user.phoneNumber ?? '',
+      role: null,
+      emailVerified: user.emailVerified,
+    );
+  }
+
+  @override
+  Future<UserModel?> reloadUserApi() async {
+    final user = await _firebase.reloadUser();
+    if (user == null) return null;
+
+    return UserModel(
+      uid: user.uid,
+      name: user.displayName ?? '',
+      email: user.email ?? '',
+      mobile: user.phoneNumber ?? '',
+      role: null,
+      emailVerified: user.emailVerified,
+    );
   }
 }

@@ -8,6 +8,7 @@ import 'package:firebaseapp/utils/exceptions/platform_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseApiService implements BaseFirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -19,6 +20,27 @@ class FirebaseApiService implements BaseFirebaseService {
   Future<UserCredential> signIn(String email, String password) {
     return _tryFirestoreCall(() {
       return _auth.signInWithEmailAndPassword(email: email, password: password);
+    });
+  }
+
+  @override
+  Future<UserCredential> googleAuth() {
+    return _tryFirestoreCall(() async {
+      //Trigger authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+
+      //Obtain auth details from request
+      final GoogleSignInAuthentication? googleAuth =
+          await userAccount?.authentication;
+
+      //create new credentials
+      final credentials = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      //once singnin , return the credentials
+      return await _auth.signInWithCredential(credentials);
     });
   }
 
@@ -36,6 +58,13 @@ class FirebaseApiService implements BaseFirebaseService {
   Future<void> sendEmailVerification() {
     return _tryFirestoreCall(() async {
       return _auth.currentUser?.sendEmailVerification();
+    });
+  }
+
+  @override
+  Future<void> sendPasswordResetLink(String email) {
+    return _tryFirestoreCall(() async {
+      return _auth.sendPasswordResetEmail(email: email);
     });
   }
 
