@@ -22,4 +22,6 @@ class LoggerHelper {
   static void error(String message, [dynamic error]) {
     _logger.e(message, error: error, stackTrace: StackTrace.current);
   }
+
+  static Future<void> initFileLogger() async {}
 }

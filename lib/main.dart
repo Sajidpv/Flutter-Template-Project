@@ -1,6 +1,7 @@
 import 'package:firebaseapp/data/network/connectivity/connection.dart';
 import 'package:firebaseapp/services/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebaseapp/utils/logging/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,10 +21,15 @@ import 'package:firebaseapp/utils/theme/theme.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+  await LoggerHelper.initFileLogger();
   // // Memory leak detection toolkit
   //debugProfilePlatformChannels = true; // Tracks platform channel usage
   // Track widget creation/destruction
   // FlutterError.onError = (FlutterErrorDetails details) {
+  // LoggerHelper.error(
+  //   'FlutterError: ${details.exceptionAsString()}',
+  //   details.exception,
+  // );
   //   // Custom error handling to catch memory-related issues (details.exception.toString().contains( 'memory') ||
   //   if (details.exception.toString().contains('memory') ||
   //       details.exception.toString().contains('dispose')) {
@@ -36,6 +42,12 @@ void main() async {
   //   // Forward to normal error handling
   //   FlutterError.presentError(details);
   // };
+
+  // Uncaught zone errors (async)
+  PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+    LoggerHelper.error('Uncaught zone error', error);
+    return true; // handled
+  };
   WidgetsFlutterBinding.ensureInitialized();
   //Init firebase with options
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

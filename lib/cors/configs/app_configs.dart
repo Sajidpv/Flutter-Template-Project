@@ -3,6 +3,8 @@
 import 'app_strings.dart';
 
 class AppConfig {
+  static bool isProduction = false;
+
   static String app_name = AppStrings.appTitle;
 
   static const bool HTTPS = false;
