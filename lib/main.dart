@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:firebaseapp/data/network/connectivity/connection.dart';
 import 'package:firebaseapp/services/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebaseapp/utils/logging/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,26 +25,26 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   await LoggerHelper.initFileLogger();
-  // // Memory leak detection toolkit
-  //debugProfilePlatformChannels = true; // Tracks platform channel usage
+  // Memory leak detection toolkit
+  debugProfilePlatformChannels = true; // Tracks platform channel usage
   // Track widget creation/destruction
-  // FlutterError.onError = (FlutterErrorDetails details) {
-  // LoggerHelper.error(
-  //   'FlutterError: ${details.exceptionAsString()}',
-  //   details.exception,
-  // );
-  //   // Custom error handling to catch memory-related issues (details.exception.toString().contains( 'memory') ||
-  //   if (details.exception.toString().contains('memory') ||
-  //       details.exception.toString().contains('dispose')) {
-  //     if (kDebugMode) {
-  //       print('* POTENTIAL MEMORY LEAK: ${details.exception}');
-  //       print(' • CONTEXT: ${details.context}');
-  //       print(' ° STACK TRACE: ${details.stack}');
-  //     }
-  //   }
-  //   // Forward to normal error handling
-  //   FlutterError.presentError(details);
-  // };
+  FlutterError.onError = (FlutterErrorDetails details) {
+    LoggerHelper.error(
+      'FlutterError: ${details.exceptionAsString()}',
+      details.exception,
+    );
+    // Custom error handling to catch memory-related issues (details.exception.toString().contains( 'memory') ||
+    if (details.exception.toString().contains('memory') ||
+        details.exception.toString().contains('dispose')) {
+      if (kDebugMode) {
+        print('* POTENTIAL MEMORY LEAK: ${details.exception}');
+        print(' • CONTEXT: ${details.context}');
+        print(' ° STACK TRACE: ${details.stack}');
+      }
+    }
+    // Forward to normal error handling
+    FlutterError.presentError(details);
+  };
 
   // Uncaught zone errors (async)
   PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
@@ -82,8 +85,15 @@ void main() async {
   //     }
   //   });
   // }
-
-  runApp(const MyApp());
+  //Catches uncaught async errors inside a zone
+  runZonedGuarded(
+    () {
+      runApp(BlocProviders(child: const MyApp()));
+    },
+    (error, stack) {
+      LoggerHelper.error("Zoned error: $error");
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {

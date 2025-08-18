@@ -31,7 +31,7 @@ class LoggerHelper {
         lineLength: 100,
         colors: true,
         printEmojis: true,
-        printTime: true,
+        dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
       ),
       level: level ?? (_isProd ? Level.warning : Level.debug),
       output: multiOutput,
@@ -45,7 +45,7 @@ class LoggerHelper {
       lineLength: 100,
       colors: true,
       printEmojis: true,
-      printTime: true,
+      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
     ),
     level: _isProd ? Level.warning : Level.debug,
   );
